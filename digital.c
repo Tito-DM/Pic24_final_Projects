@@ -1,21 +1,21 @@
 #include "p24fj128ga010.h"
 #include "digital.h"
 
-void pinMode(int tris, int mode)
+void pinsMode(unsigned* tris, int mode)
 {
-    tris = mode;
+    *tris = mode;
 }
 
-void digitalWrite(int port, int value)
+void digitalWrite(unsigned* port, int value)
 {
-    port = value;
+    *port = value;
 }
 
 
 
-int digitalRead(int port)
+int digitalRead(unsigned* port)
 {
     int status= 0;
-    status = port;
-    return status;
+    status = *port;
+    return  port;
 }
