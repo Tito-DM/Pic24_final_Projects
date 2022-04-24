@@ -43,7 +43,7 @@
 
 // Comment the line for 3rd board version 
 #define BOARD_VERSION4
-
+#define BUFFER_SIZE 103
 // Comment the line if PIC24 is installed directly on board
 //#define PIM_SWAP
 #include "p24fj128ga010.h"

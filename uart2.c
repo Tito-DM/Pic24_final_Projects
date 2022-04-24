@@ -15,6 +15,7 @@
  * U2BRG register value and baudrate mistake calculation
  *****************************************************************************/
 #define BAUDRATEREG2 25
+#define BACKSPACE 0x8 // ASCII backspace character code
 
 /*#if BAUDRATEREG2 > 255
 #error Cannot set up UART2 for the SYSCLK and BAUDRATE.\
@@ -65,7 +66,7 @@ void UART2Init()
  * Output: None.
  *
  *****************************************************************************/
-void  UART2PutChar(char *Ch){
+void  SerialWrite(char *Ch){
     // wait for empty buffer  
     while(*Ch){
      //  
@@ -96,6 +97,14 @@ char UART2IsPressed()
     return 0;
 }
 
+char UART2GetChar(){
+char Temp;
+    while(IFS1bits.U2RXIF == 0);
+    Temp = U2RXREG;
+    IFS1bits.U2RXIF = 0;
+    return Temp;
+}
+
 /*****************************************************************************
  * Function: UART2GetChar
  *
@@ -108,12 +117,28 @@ char UART2IsPressed()
  * Output: Byte received.
  *
  *****************************************************************************/
-char *UART2GetChar(){
-char Temp;
-    while(IFS1bits.U2RXIF == 0);
-    Temp = U2RXREG;
-    IFS1bits.U2RXIF = 0;
-    return Temp;
+char *SerialRead( char *s, int len){
+	char *p = s; // copy the buffer pointer
+	 do{
+		 *s = UART2GetChar(); // wait for a new character
+		// putU2( *s); // echo character
+		 if (( *s==BACKSPACE)&&( s>p))
+		 {
+		 //putU2( ' '); // overwrite the last character
+		 //putU2( BACKSPACE);
+		 len++;
+		 s--; // back the pointer
+		 continue;
+		 }
+		 if ( *s=='\n') // line feed, ignore it
+		 continue;
+		 if ( *s=='\r') // end of line, end loop
+		 break;
+		 s++; // increment buffer pointer
+		 len--;
+	 } while ( len>1 ); // until buffer full
+	 *s = '\0'; // null terminate the string
+	 return p; // return buffer pointer
 }
 
 /*****************************************************************************
