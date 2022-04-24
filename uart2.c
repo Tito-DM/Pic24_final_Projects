@@ -1,16 +1,24 @@
-/*****************************************************************************
- *
- * UART Driver for PIC24.
- *
- *****************************************************************************
+/***************************
+ *  Projects Description
+ * sistema  de climatização
+ ***************************
  * FileName:        uart2.c
- * Dependencies:    system.h
+ * Dependencies:   	[sytem.h, config.h, stdio.h]
  * Processor:       PIC24
- * Compiler:       	MPAB C30
-	...
- *****************************************************************************/
+ * Compiler:       	MPLAB C30
+ * Linker:          MPLAB LINK30
+ * Author
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Nome: Tito Domingos Muanda
+ * Nº: 57128
+ * Nome:
+ * Nº
+ * Nome:
+ * Nº
+ ***************************/
+
 #include "system.h"
-#include<stdio.h>
+#include <stdio.h>
 /*****************************************************************************
  * U2BRG register value and baudrate mistake calculation
  *****************************************************************************/
@@ -42,7 +50,7 @@
  *****************************************************************************/
 void UART2Init()
 {
-    // Set directions of UART IOs
+	// Set directions of UART IOs
 	UART2_TX_TRIS = 0;
 	UART2_RX_TRIS = 1;
 	U2BRG = BAUDRATEREG2;
@@ -50,8 +58,8 @@ void UART2Init()
 	U2STA = 0;
 	U2MODEbits.UARTEN = 1;
 	U2STAbits.UTXEN = 1;
-  	// reset RX flag
- 	IFS1bits.U2RXIF = 0;
+	// reset RX flag
+	IFS1bits.U2RXIF = 0;
 }
 
 /*****************************************************************************
@@ -66,16 +74,17 @@ void UART2Init()
  * Output: None.
  *
  *****************************************************************************/
-void  SerialWrite(char *Ch){
-    // wait for empty buffer  
-    while(*Ch){
-     //  
-while(U2STAbits.UTXBF == 1){
-  		   U2TXREG = *Ch++;
-		  
-    }
-    }   
-     
+void SerialWrite(char *Ch)
+{
+	// wait for empty buffer
+	while (*Ch)
+	{
+		//
+		while (U2STAbits.UTXBF == 1)
+		{
+			U2TXREG = *Ch++;
+		}
+	}
 }
 
 /*****************************************************************************
@@ -92,17 +101,19 @@ while(U2STAbits.UTXBF == 1){
  *****************************************************************************/
 char UART2IsPressed()
 {
-    if(IFS1bits.U2RXIF == 1)
-        return 1;
-    return 0;
+	if (IFS1bits.U2RXIF == 1)
+		return 1;
+	return 0;
 }
 
-char UART2GetChar(){
-char Temp;
-    while(IFS1bits.U2RXIF == 0);
-    Temp = U2RXREG;
-    IFS1bits.U2RXIF = 0;
-    return Temp;
+char UART2GetChar()
+{
+	char Temp;
+	while (IFS1bits.U2RXIF == 0)
+		;
+	Temp = U2RXREG;
+	IFS1bits.U2RXIF = 0;
+	return Temp;
 }
 
 /*****************************************************************************
@@ -117,28 +128,30 @@ char Temp;
  * Output: Byte received.
  *
  *****************************************************************************/
-char *SerialRead( char *s, int len){
+char *SerialRead(char *s, int len)
+{
 	char *p = s; // copy the buffer pointer
-	 do{
-		 *s = UART2GetChar(); // wait for a new character
-		// putU2( *s); // echo character
-		 if (( *s==BACKSPACE)&&( s>p))
-		 {
-		 //putU2( ' '); // overwrite the last character
-		 //putU2( BACKSPACE);
-		 len++;
-		 s--; // back the pointer
-		 continue;
-		 }
-		 if ( *s=='\n') // line feed, ignore it
-		 continue;
-		 if ( *s=='\r') // end of line, end loop
-		 break;
-		 s++; // increment buffer pointer
-		 len--;
-	 } while ( len>1 ); // until buffer full
-	 *s = '\0'; // null terminate the string
-	 return p; // return buffer pointer
+	do
+	{
+		*s = UART2GetChar(); // wait for a new character
+							 // putU2( *s); // echo character
+		if ((*s == BACKSPACE) && (s > p))
+		{
+			// putU2( ' '); // overwrite the last character
+			// putU2( BACKSPACE);
+			len++;
+			s--; // back the pointer
+			continue;
+		}
+		if (*s == '\n') // line feed, ignore it
+			continue;
+		if (*s == '\r') // end of line, end loop
+			break;
+		s++; // increment buffer pointer
+		len--;
+	} while (len > 1); // until buffer full
+	*s = '\0';		   // null terminate the string
+	return p;		   // return buffer pointer
 }
 
 /*****************************************************************************
@@ -154,19 +167,22 @@ char *SerialRead( char *s, int len){
  * Output: None.
  *
  *****************************************************************************/
-void  UART2PutDec(unsigned char Dec){
-unsigned char Res;
-    Res = Dec;
+void UART2PutDec(unsigned char Dec)
+{
+	/*
+		unsigned char Res;
+		Res = Dec;
 
-    if(Res/100) 
-        UART2PutChar(Res/100+'0');
-    Res = Res - (Res/100)*100;
+		if (Res / 100)
+			UART2PutChar(Res / 100 + '0');
+		Res = Res - (Res / 100) * 100;
 
-    if(Res/10) 
-        UART2PutChar(Res/10+'0');
-    Res = Res - (Res/10)*10;
- 
-    UART2PutChar(Res+'0');
+		if (Res / 10)
+			UART2PutChar(Res / 10 + '0');
+		Res = Res - (Res / 10) * 10;
+
+		UART2PutChar(Res + '0');
+	*/
 }
 
 /*****************************************************************************

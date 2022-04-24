@@ -1,8 +1,26 @@
+/***************************
+ *  Projects Description
+ * sistema  de climatização
+ ***************************
+ * FileName:        adc.h
+ * Dependencies:   	none
+ * Processor:       PIC24
+ * Compiler:       	MPLAB C30
+ * Linker:          MPLAB LINK30
+ * Author
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Nome: Tito Domingos Muanda
+ * Nº: 57128
+ * Nome:
+ * Nº
+ * Nome:
+ * Nº
+ ***************************/
 
 /*****************************************************************************
  * Function: ADCInit
  *
- * 
+ *
  *
  * descreption: perform adc initialization.
  *
@@ -26,7 +44,7 @@ extern char ADCInit();
  * Output: None.
  *
  *****************************************************************************/
-extern void  AnalogWrite(unsigned char Dec);
+extern void AnalogWrite(unsigned char Dec);
 
 /*****************************************************************************
  * Function: AnalogRead
@@ -41,7 +59,7 @@ extern void  AnalogWrite(unsigned char Dec);
  * Output: None.
  *
  *****************************************************************************/
-extern int  AnalogRead(int ch);
+extern int AnalogRead(int ch);
 
 /*****************************************************************************
  * EOF

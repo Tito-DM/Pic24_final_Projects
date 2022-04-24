@@ -1,24 +1,30 @@
-/*****************************************************************************
- *
- * UART Driver for PIC24.
- *
- *****************************************************************************
- * FileName:        uart2.c
- * Dependencies:    system.h
+/***************************
+ *  Projects Description
+ * sistema  de climatização
+ ***************************
+ * FileName:        uart2.h
+ * Dependencies:   	[sytem.h, config.h, stdio.h]
  * Processor:       PIC24
  * Compiler:       	MPLAB C30
  * Linker:          MPLAB LINK30
- * 
- *****************************************************************************/
+ * Author
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Nome: Tito Domingos Muanda
+ * Nº: 57128
+ * Nome:
+ * Nº
+ * Nome:
+ * Nº
+ ***************************/
 
 /*****************************************************************************
  * DEFINITIONS
  *****************************************************************************/
 // Baudrate
-#define BAUDRATE2		19200
+#define BAUDRATE2 19200
 // UART IOs
-#define UART2_TX_TRIS   TRISFbits.TRISF5
-#define UART2_RX_TRIS   TRISFbits.TRISF4
+#define UART2_TX_TRIS TRISFbits.TRISF5
+#define UART2_RX_TRIS TRISFbits.TRISF4
 
 /*****************************************************************************
  * Function: UART2Init
@@ -46,7 +52,7 @@ extern void UART2Init();
  * Output: None.
  *
  *****************************************************************************/
-extern void  SerialWrite(char *Ch);
+extern void SerialWrite(char *Ch);
 
 /*****************************************************************************
  * Function: UART2IsPressed
@@ -74,9 +80,8 @@ extern char UART2IsPressed();
  * Output: Byte received.
  *
  *****************************************************************************/
-extern char *SerialRead( char *s, int len);
+extern char *SerialRead(char *s, int len);
 extern char UART2GetChar();
-
 
 /*****************************************************************************
  * Function: UART2PutDec
@@ -91,7 +96,7 @@ extern char UART2GetChar();
  * Output: None.
  *
  *****************************************************************************/
-extern void  UART2PutDec(unsigned char Dec);
+extern void UART2PutDec(unsigned char Dec);
 
 /*****************************************************************************
  * EOF

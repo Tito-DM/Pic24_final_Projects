@@ -1,49 +1,24 @@
 /***************************
- *  System
+ *  Projects Description
+ * sistema  de climatização
  ***************************
  * FileName:        system.h
- * Dependencies:    
+ * Dependencies:   	nome
  * Processor:       PIC24
  * Compiler:       	MPLAB C30
  * Linker:          MPLAB LINK30
- * Company:         Microchip Technology Incorporated
- *
- * Software License Agreement
- *
- * The software supplied herewith by Microchip Technology Incorporated
- * (the "Company") is intended and supplied to you, the Company's
- * customer, for use solely and exclusively with products manufactured
- * by the Company. 
- *
- * The software is owned by the Company and/or its supplier, and is 
- * protected under applicable copyright laws. All rights are reserved. 
- * Any use in violation of the foregoing restrictions may subject the 
- * user to criminal sanctions under applicable laws, as well as to 
- * civil liability for the breach of the terms and conditions of this 
- * license.
- *
- * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES, 
- * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED 
- * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
- * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT, 
- * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR 
- * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
- *
- *
- * The file assembles all header files and
- * contains shared information for all modules
- *
- * Author               Date        Comment
+ * Author
  *~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Anton Alkhimenok		10/21/05	...
+ * Nome: Tito Domingos Muanda
+ * Nº: 57128
+ * Nome:
+ * Nº
+ * Nome:
+ * Nº
  ***************************/
 
 // External oscillator frequency
-#define SYSCLK          16000000
 
-// Comment the line for 3rd board version 
-#define BOARD_VERSION4
-#define BUFFER_SIZE 103
 // Comment the line if PIC24 is installed directly on board
 //#define PIM_SWAP
 #include "p24fj128ga010.h"
@@ -52,11 +27,13 @@
 #include "delay.h"
 #include "digital.h"
 
+#define SYSCLK 16000000
 
-
-
-
-
+// Comment the line for 3rd board version
+#define BOARD_VERSION4
+#define BUFFER_SIZE 103
+#define TEMP PORTAbits.RA2
+#define LDR PORTAbits.RA3
 
 /***************************
  * EOF
